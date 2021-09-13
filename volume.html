@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        .vol {
+            display: flex;
+        }
+
+        .volume {
+            width: 60px;
+            height: 100px;
+            border: 1px solid black;
+        }
+
+        .green {
+            background-color: rgb(20, 182, 20);
+        }
+
+        .yellow {
+            background-color: rgb(235, 235, 12);
+        }
+
+        .red {
+            background-color: rgb(238, 22, 22);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="buttons">
+        <button id="volume-up">up</button>
+        <button id="volume-down">down</button>
+    </div>
+    <div class="vol">
+    </div>
+    <script>
+
+        document.querySelector("#volume-down").addEventListener("click",
+            function () {
+                document.querySelector(".vol").lastChild.remove()
+            })
+        document.querySelector("#volume-up").addEventListener("click",
+            function () {
+                let vol = document.createElement("div")
+                vol.classList.add("volume")
+                document.querySelector(".vol").appendChild(vol)
+
+                let x = document.querySelectorAll(".volume").length
+                if (x < 4) {
+                    vol.classList.add("green");
+                } else if (x < 8) {
+                    vol.classList.add("yellow");
+                } else {
+                    vol.classList.add("red");
+                }
+
+
+            });
+
+    </script>
+</body>
+
+</html>
