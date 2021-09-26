@@ -1,14 +1,16 @@
 //DOM elemek kiválasztása
 const todoInput = document.querySelector(".todo-input");
-const todoButton = document.querySelector(".todo-button");
+const addTodoButton = document.querySelector(".todo-button");
 const todoList = document.querySelector(".todo-list");
 const filterOption = document.querySelector(".filter-todo");
+filterOption.addEventListener("click", function () { console.log('click') })
+filterOption.addEventListener("change", function () { console.log('change') })
 
 //eseményt adok hozzá
 document.addEventListener("DOMContentLoaded", getTodos);
-todoButton.addEventListener("click", addTodo);
+addTodoButton.addEventListener("click", addTodo);
 todoList.addEventListener("click", deleteTodo);
-filterOption.addEventListener("click", filterTodo);
+filterOption.addEventListener("change", filterTodo);
 
 
 
@@ -50,7 +52,7 @@ function deleteTodo(e) {
         // e.target.parentElement.remove();
         const todo = item.parentElement;
         todo.classList.add("fall");
-        removeLocalTodos(todo);
+        //  removeLocalTodos(todo);
         todo.addEventListener("transitionend", e => {
             todo.remove();
         });
@@ -94,3 +96,32 @@ function getTodos() {
         todoList.appendChild(todoDiv);
     });
 }
+
+
+function filterTodo(e) {
+
+    const todos = todoList.childNodes;
+    todos.forEach(function (todo) {
+        switch (e.target.value) {
+            case "all":
+                todo.style.display = "flex";
+                break;
+
+
+            case "completed":
+                if (todo.classList.contains("completed")) {
+                    todo.style.display = "flex";
+                } else {
+                    todo.style.display = "none";
+                }
+                break;
+            case "uncompleted":
+                if (!todo.classList.contains("completed")) {
+                    todo.style.display = "flex";
+                } else {
+                    todo.style.display = "none";
+                }
+        }
+    });
+}
+
